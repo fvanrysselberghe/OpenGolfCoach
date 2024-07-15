@@ -3,5 +3,5 @@
 /// </summary> 
 public class GpxFileUploadModel
 {
-    public IFormFile File { get; set; }
+    public required IFormFile File { get; set; }
 }
