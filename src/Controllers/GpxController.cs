@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration.Xml;
 using NetTopologySuite.IO;
+using OpenGolfCoach.Models;
 
 namespace OpenGolfCoach
 {
@@ -13,13 +14,13 @@ namespace OpenGolfCoach
     {
         [HttpPost]
         [Consumes("multipart/form-data")]
-        public IEnumerable<double> UploadGpx([FromForm] GpxFileUploadModel rawFile)
+        public IEnumerable<WaypointCandidate> UploadGpx([FromForm] GpxFileUploadModel rawFile)
         {
             using var gpxStream = rawFile.File.OpenReadStream();
             using var xmlReader = XmlReader.Create(gpxStream);
             var gpx = GpxFile.ReadFrom(xmlReader, null);
 
-            var result = new LinkedList<double>();
+            var result = new LinkedList<WaypointCandidate>();
 
             GpxWaypoint? prevWaypoint = null;
             foreach (var track in gpx.Tracks)
@@ -34,7 +35,7 @@ namespace OpenGolfCoach
                             var distance = GetDistance(waypoint, prevWaypoint);
                             var delay = waypoint.TimestampUtc - prevWaypoint.TimestampUtc; //TODO add null check in input
                             if (delay.HasValue)
-                                result.AddLast(distance / delay.Value.Seconds);
+                                result.AddLast(new WaypointCandidate { Speed = distance / delay.Value.Seconds, Waypoint = prevWaypoint });
 
                         }
                         prevWaypoint = waypoint;
