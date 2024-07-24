@@ -1,12 +1,33 @@
 <!DOCTYPE html>
 <html>
-<header></header>
+<header>
+
+</header>
 
 <body>
-    <form action="api/v1/gpx" enctype="multipart/form-data" method="POST">
+    <form action="api/v1/gpx" enctype="multipart/form-data" method="POST" id="fileSelector">
         <input type="file" name="file">File</input>
         <button name="submit">POST</button>
     </form>
 </body>
+
+<script>
+    function processFile(event) {
+        const form = event.currentTarget
+        const url = new URL(form.action)
+        const formData = new FormData(form)
+
+        var options = {
+            method: form.method,
+            body: formData
+        }
+
+        fetch(url, options)
+        event.preventDefault()
+    }
+
+    const form = document.getElementById("fileSelector")
+    form.addEventListener('submit', processFile)
+</script>
 
 </html>
