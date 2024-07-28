@@ -33,8 +33,20 @@
             body: formData
         }
 
-        fetch(url, options)
         event.preventDefault()
+
+        fetch(url, options)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to process file')
+                }
+
+                return response.json()
+            }).then(pausePointsResults => {
+                pausePointsResults.forEach(point => {
+                    console.log(point.longitude)
+                });
+            })
     }
 
     const form = document.getElementById("fileSelector")
