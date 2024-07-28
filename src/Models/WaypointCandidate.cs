@@ -4,6 +4,7 @@ namespace OpenGolfCoach.Models;
 
 public record class WaypointCandidate
 {
-    public required GpxWaypoint Waypoint { init; get; }
     public double Speed { init; get; }
+    public required double Longitude { init; get; }
+    public required double Latitude { init; get; }
 }

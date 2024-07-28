@@ -35,7 +35,7 @@ namespace OpenGolfCoach
                             var distance = GetDistance(waypoint, prevWaypoint);
                             var delay = waypoint.TimestampUtc - prevWaypoint.TimestampUtc; //TODO add null check in input
                             if (delay.HasValue)
-                                result.AddLast(new WaypointCandidate { Speed = distance / delay.Value.Seconds, Waypoint = prevWaypoint });
+                                result.AddLast(new WaypointCandidate { Speed = distance / delay.Value.Seconds, Longitude = prevWaypoint.Longitude.Value, Latitude = prevWaypoint.Latitude.Value });
 
                         }
                         prevWaypoint = waypoint;
