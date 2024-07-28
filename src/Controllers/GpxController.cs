@@ -14,7 +14,7 @@ namespace OpenGolfCoach
     {
         [HttpPost]
         [Consumes("multipart/form-data")]
-        public IEnumerable<WaypointCandidate> UploadGpx([FromForm] GpxFileUploadModel rawFile)
+        public IEnumerable<WaypointCandidate> UploadGpx([FromForm] GpxFileUploadModel rawFile, double? maxSpeedForStroke)
         {
             using var gpxStream = rawFile.File.OpenReadStream();
             using var xmlReader = XmlReader.Create(gpxStream);
@@ -42,6 +42,9 @@ namespace OpenGolfCoach
                     }
                 }
             }
+
+            if (maxSpeedForStroke.HasValue)
+                return result.Where(candidate => candidate.Speed <= maxSpeedForStroke.Value);
             return result;
         }
 
