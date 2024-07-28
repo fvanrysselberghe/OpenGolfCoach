@@ -43,20 +43,27 @@
 
                 return response.json()
             }).then(pausePointsResults => {
+                if (pausePointsResults.length == 0)
+                    return;
+
+                //Focus on first node
+                const focusPoint = pausePointsResults[0]
+
+                var map = L.map('map').setView([focusPoint.latitude, focusPoint.longitude], 20);
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
+
                 pausePointsResults.forEach(point => {
                     L.marker([point.latitude, point.longitude]).addTo(map)
                 });
             })
     }
-
     const form = document.getElementById("fileSelector")
     form.addEventListener('submit', processFile)
 
-    var map = L.map('map').setView([51.505, -0.09], 13);
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map); 
+
 </script>
 
 </html>
