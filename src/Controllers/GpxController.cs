@@ -12,6 +12,16 @@ namespace OpenGolfCoach
     [ApiController]
     public class GpxController : ControllerBase
     {
+        /// <summary>
+        /// Creates a game record from a GPX file. 
+        /// The game record is largely empty since the processing of the GpxFile requires manual intervention
+        /// Only basic properties like the date and (likely) location are filled in. 
+        // 
+        ///  
+        /// </summary>
+        /// <param name="rawFile"></param>
+        /// <param name="maxSpeedForStroke"></param>
+        /// <returns>Data needed for the manual entry</returns>
         [HttpPost]
         [Consumes("multipart/form-data")]
         public IEnumerable<WaypointCandidate> CreateFromGpx([FromForm] GpxFileUploadModel rawFile, double? maxSpeedForStroke)
