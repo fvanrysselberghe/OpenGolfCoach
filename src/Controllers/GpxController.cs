@@ -30,52 +30,12 @@ namespace OpenGolfCoach
             using var xmlReader = XmlReader.Create(gpxStream);
             var gpx = GpxFile.ReadFrom(xmlReader, null);
 
-            var result = new LinkedList<WaypointCandidate>();
-
-            GpxWaypoint? prevWaypoint = null;
-            foreach (var track in gpx.Tracks)
-            {
-                foreach (var segment in track.Segments)
-                {
-                    foreach (var waypoint in segment.Waypoints)
-                    {
-                        if (prevWaypoint != null)
-                        {
-
-                            var distance = GetDistance(waypoint, prevWaypoint);
-                            var delay = waypoint.TimestampUtc - prevWaypoint.TimestampUtc; //TODO add null check in input
-                            if (delay.HasValue)
-                                result.AddLast(new WaypointCandidate { Speed = distance / delay.Value.Seconds, Longitude = prevWaypoint.Longitude.Value, Latitude = prevWaypoint.Latitude.Value });
-
-                        }
-                        prevWaypoint = waypoint;
-                    }
-                }
-            }
+            var filter = new PauseFilter();
 
             if (maxSpeedForStroke.HasValue)
-                return result.Where(candidate => candidate.Speed <= maxSpeedForStroke.Value);
-            return result;
+                filter.MaxSpeedForPause = maxSpeedForStroke.Value;
+
+            return filter.Apply(gpx);
         }
-
-        private double GetDistance(GpxWaypoint current, GpxWaypoint old)
-        {
-            const double radius = 6378100; // meters
-
-            var lat1 = (Math.PI / 180) * current.Latitude.Value;
-            var lat2 = (Math.PI / 180) * old.Latitude.Value;
-            var lon1 = (Math.PI / 180) * current.Longitude.Value;
-            var lon2 = (Math.PI / 180) * old.Longitude.Value;
-
-            var sdlat = Math.Sin((lat2 - lat1) / 2);
-            var sdlon = Math.Sin((lon2 - lon1) / 2);
-
-            var q = Math.Pow(sdlat, 2) + Math.Cos(lat1) * Math.Cos(lat2) * sdlon * sdlon;
-            var d = 2 * radius * Math.Asin(Math.Sqrt(q));
-
-            return d;
-        }
-
     }
-
 }
