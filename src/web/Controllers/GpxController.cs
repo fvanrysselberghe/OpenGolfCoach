@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration.Xml;
 using NetTopologySuite.IO;
-using OpenGolfCoach.Models;
+using OpenGolfCoach.Application;
+using OpenGolfCoach.Application.Models;
+using OpenGolfCoach.Web.Models;
 
 namespace OpenGolfCoach
 {

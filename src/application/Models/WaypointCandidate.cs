@@ -1,6 +1,4 @@
-using NetTopologySuite.IO;
-
-namespace OpenGolfCoach.Models;
+namespace OpenGolfCoach.Application.Models;
 
 public record class WaypointCandidate
 {
