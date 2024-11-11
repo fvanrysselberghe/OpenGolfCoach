@@ -31,13 +31,8 @@ namespace OpenGolfCoach
             using var gpxStream = rawFile.File.OpenReadStream();
             using var xmlReader = XmlReader.Create(gpxStream);
             var gpx = GpxFile.ReadFrom(xmlReader, null);
-
-            var filter = new PauseFilter();
-
-            if (maxSpeedForStroke.HasValue)
-                filter.MaxSpeedForPause = maxSpeedForStroke.Value;
-
-            return filter.Apply(gpx);
+            return new FromGpxImplementation().Create(gpx, maxSpeedForStroke);
         }
+
     }
 }
