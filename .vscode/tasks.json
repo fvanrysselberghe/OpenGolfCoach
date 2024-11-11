@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/opengolfcoach.csproj",
+                "${workspaceFolder}/src/web/web.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary;ForceNoAlign"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/src/opengolfcoach.csproj",
+                "${workspaceFolder}/src/web.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary;ForceNoAlign"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/src/opengolfcoach.csproj"
+                "${workspaceFolder}/src/web.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
