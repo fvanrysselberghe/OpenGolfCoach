@@ -29,14 +29,18 @@ namespace OpenGolfCoach.Application
                 {
                     foreach (var waypoint in segment.Waypoints)
                     {
-                        if (prevWaypoint != null)
+                        if (prevWaypoint == null)
                         {
-
+                            // First waypoint hence we don't have a speed yet.
+                            result.AddLast(new WaypointCandidate { Speed = 0, Longitude = waypoint.Longitude.Value, Latitude = waypoint.Latitude.Value });
+                        }
+                        else
+                        {
+                            // Succeeding waypoints hence determine speed by checking the distance covered in the elapsed time
                             var distance = GetDistance(waypoint, prevWaypoint);
                             var delay = waypoint.TimestampUtc - prevWaypoint.TimestampUtc; //TODO add null check in input
                             if (delay.HasValue)
                                 result.AddLast(new WaypointCandidate { Speed = distance / delay.Value.Seconds, Longitude = prevWaypoint.Longitude.Value, Latitude = prevWaypoint.Latitude.Value });
-
                         }
                         prevWaypoint = waypoint;
                     }
