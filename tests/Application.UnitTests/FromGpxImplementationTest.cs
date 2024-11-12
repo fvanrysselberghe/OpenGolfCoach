@@ -24,6 +24,6 @@ public class FromGpxImplementationTest
 
         var result = underTest.Create(singlePointGpx, null);
 
-        Assert.Equal(1, result.Count());
+        Assert.Single(result);
     }
 }
