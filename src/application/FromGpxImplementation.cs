@@ -4,7 +4,7 @@ using OpenGolfCoach.Application.Models;
 
 namespace OpenGolfCoach.Application;
 
-public class FromGpxImplementation
+public class FromGpxImplementation : IFromGpxImplementation
 {
     public FromGpxImplementation(IGolfCourseRepository courses) => _Repository = courses;
 

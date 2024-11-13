@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration.Xml;
 using NetTopologySuite.IO;
 using OpenGolfCoach.Application;
+using OpenGolfCoach.Application.Interfaces;
 using OpenGolfCoach.Application.Models;
 using OpenGolfCoach.Web.Models;
 
@@ -14,6 +15,8 @@ namespace OpenGolfCoach
     [ApiController]
     public class GpxController : ControllerBase
     {
+        public GpxController(IFromGpxImplementation fromGpxImplementation) => _fromGpxImplementation = fromGpxImplementation;
+
         /// <summary>
         /// Creates a game record from a GPX file. 
         /// The game record is largely empty since the processing of the GpxFile requires manual intervention
@@ -31,8 +34,10 @@ namespace OpenGolfCoach
             using var gpxStream = rawFile.File.OpenReadStream();
             using var xmlReader = XmlReader.Create(gpxStream);
             var gpx = GpxFile.ReadFrom(xmlReader, null);
-            return new FromGpxImplementation(new StubGolfRepository()).Create(gpx, maxSpeedForStroke);
+            return _fromGpxImplementation.Create(gpx, maxSpeedForStroke);
         }
+
+        private readonly IFromGpxImplementation _fromGpxImplementation;
 
     }
 }
