@@ -9,7 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IGolfCourseRepository, StubGolfRepository>();
+builder.Services.AddScoped<IGolfCourseRepository, OpenStreetmapRepository>();
 builder.Services.AddScoped<IFromGpxImplementation, FromGpxImplementation>();
 
 
