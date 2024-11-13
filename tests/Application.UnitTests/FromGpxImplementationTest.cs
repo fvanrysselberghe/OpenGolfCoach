@@ -1,4 +1,6 @@
 using NetTopologySuite.IO;
+using OpenGolfCoach.Application.Interfaces;
+using OpenGolfCoach.Application.Models;
 
 namespace OpenGolfCoach.Application.UnitTests;
 
@@ -16,10 +18,12 @@ public class FromGpxImplementationTest
     </trk>
 </gpx>";
 
+    
+
     [Fact]
     public void GivenSinglePointGpxClosestCourseIsReturned()
     {
-        var underTest = new OpenGolfCoach.Application.FromGpxImplementation();
+        var underTest = new OpenGolfCoach.Application.FromGpxImplementation(new StubGolfRepository());
         var singlePointGpx = GpxFile.Parse(SinglePointGpxContent, null);
 
         var result = underTest.Create(singlePointGpx, null);

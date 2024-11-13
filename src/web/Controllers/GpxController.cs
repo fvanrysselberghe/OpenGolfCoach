@@ -31,7 +31,7 @@ namespace OpenGolfCoach
             using var gpxStream = rawFile.File.OpenReadStream();
             using var xmlReader = XmlReader.Create(gpxStream);
             var gpx = GpxFile.ReadFrom(xmlReader, null);
-            return new FromGpxImplementation().Create(gpx, maxSpeedForStroke);
+            return new FromGpxImplementation(new StubGolfRepository()).Create(gpx, maxSpeedForStroke);
         }
 
     }

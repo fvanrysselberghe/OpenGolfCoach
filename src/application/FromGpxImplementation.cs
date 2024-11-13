@@ -1,10 +1,12 @@
 using NetTopologySuite.IO;
+using OpenGolfCoach.Application.Interfaces;
 using OpenGolfCoach.Application.Models;
 
 namespace OpenGolfCoach.Application;
 
 public class FromGpxImplementation
 {
+    public FromGpxImplementation(IGolfCourseRepository courses) => _Repository = courses;
 
     public IEnumerable<WaypointCandidate> Create(GpxFile gpx, double? maxSpeedForStroke)
     {
@@ -15,4 +17,6 @@ public class FromGpxImplementation
 
         return filter.Apply(gpx);
     }
+
+    private readonly IGolfCourseRepository _Repository;
 }
