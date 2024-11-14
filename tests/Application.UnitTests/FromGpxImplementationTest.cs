@@ -18,7 +18,7 @@ public class FromGpxImplementationTest
     </trk>
 </gpx>";
 
-    
+
 
     [Fact]
     public void GivenSinglePointGpxClosestCourseIsReturned()
@@ -28,6 +28,7 @@ public class FromGpxImplementationTest
 
         var result = underTest.Create(singlePointGpx, null);
 
-        Assert.Single(result);
+        Assert.Equal("Bushwood Country Club", result.Course.Name);
+        //Assert.Single(result.StrokeLocations);
     }
 }

@@ -43,12 +43,12 @@
                 }
 
                 return response.json()
-            }).then(pausePointsResults => {
-                if (pausePointsResults.length == 0)
+            }).then(result => {
+                if (result.strokeLocations.length == 0)
                     return;
 
                 //Focus on first node
-                const focusPoint = pausePointsResults[0]
+                const focusPoint = result.strokeLocations[0]
 
                 var map = L.map('map').setView([focusPoint.latitude, focusPoint.longitude], 20);
                 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -56,7 +56,7 @@
                     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                 }).addTo(map);
 
-                pausePointsResults.forEach(point => {
+                result.strokeLocations.forEach(point => {
                     L.marker([point.latitude, point.longitude]).addTo(map)
                 });
             })

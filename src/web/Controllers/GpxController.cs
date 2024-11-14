@@ -29,7 +29,7 @@ namespace OpenGolfCoach
         /// <returns>Data needed for the manual entry</returns>
         [HttpPost]
         [Consumes("multipart/form-data")]
-        public IEnumerable<WaypointCandidate> CreateFromGpx([FromForm] GpxFileUploadModel rawFile, double? maxSpeedForStroke)
+        public GameInputByLocation CreateFromGpx([FromForm] GpxFileUploadModel rawFile, double? maxSpeedForStroke)
         {
             using var gpxStream = rawFile.File.OpenReadStream();
             using var xmlReader = XmlReader.Create(gpxStream);
