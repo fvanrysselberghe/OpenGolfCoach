@@ -1,5 +1,6 @@
 using System.Drawing;
 using System.Net;
+using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;
 using OpenGolfCoach.Application.Interfaces;
 using OpenGolfCoach.Application.Models;
@@ -22,8 +23,7 @@ public class FromGpxImplementation : IFromGpxImplementation
         if (attempts.Count() < 1)
             throw new NoLocationException();
 
-        var referencePoint = GetReferencePoint(attempts);
-        return new GameInputByLocation("123", _Repository.Retrieve(referencePoint.Item1, referencePoint.Item2), new List<WaypointCandidate>(attempts));
+        return new GameInputByLocation("123", _Repository.Retrieve(GetReferencePoint(attempts)), new List<WaypointCandidate>(attempts));
     }
 
     /// <summary>
@@ -35,10 +35,9 @@ public class FromGpxImplementation : IFromGpxImplementation
     /// </summary>
     /// <param name="attempts">Locations tracked</param>
     /// <returns></returns>
-    private Tuple<double, double> GetReferencePoint(IEnumerable<WaypointCandidate> attempts)
+    private Coordinate GetReferencePoint(IEnumerable<WaypointCandidate> attempts)
     {
-        var first = attempts.First();
-        return new Tuple<double, double>(first.Longitude, first.Latitude);
+        return attempts.First().Location;
     }
 
     private readonly IGolfCourseRepository _Repository;
