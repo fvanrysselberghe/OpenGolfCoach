@@ -23,7 +23,7 @@ public class FromGpxImplementation : IFromGpxImplementation
         if (attempts.Count() < 1)
             throw new NoLocationException();
 
-        return new GameInputByLocation("123", _Repository.Retrieve(GetReferencePoint(attempts)), new List<WaypointCandidate>(attempts));
+        return new GameInputByLocation("123", _Repository.Retrieve(GetReferencePoint(attempts)), new List<Coordinate>(attempts.Select(candidate => candidate.Location).ToList()));
     }
 
     /// <summary>
