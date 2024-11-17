@@ -19,6 +19,9 @@ public class FromGpxImplementation : IFromGpxImplementation
 
         var attempts = filter.Apply(gpx);
 
+        if (attempts.Count() < 1)
+            throw new NoLocationException();
+
         return new GameInputByLocation("123", _Repository.Retrieve(0, 0), new List<WaypointCandidate>(attempts));
     }
 

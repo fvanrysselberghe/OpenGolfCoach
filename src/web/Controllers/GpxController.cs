@@ -29,12 +29,19 @@ namespace OpenGolfCoach
         /// <returns>Data needed for the manual entry</returns>
         [HttpPost]
         [Consumes("multipart/form-data")]
-        public GameInputByLocation CreateFromGpx([FromForm] GpxFileUploadModel rawFile, double? maxSpeedForStroke)
+        public IActionResult CreateFromGpx([FromForm] GpxFileUploadModel rawFile, double? maxSpeedForStroke)
         {
             using var gpxStream = rawFile.File.OpenReadStream();
             using var xmlReader = XmlReader.Create(gpxStream);
             var gpx = GpxFile.ReadFrom(xmlReader, null);
-            return _fromGpxImplementation.Create(gpx, maxSpeedForStroke);
+            try
+            {
+                return Ok(_fromGpxImplementation.Create(gpx, maxSpeedForStroke));
+            }
+            catch (NoLocationException)
+            {
+                return BadRequest(); //May require more details for the frontend to handle
+            }
         }
 
         private readonly IFromGpxImplementation _fromGpxImplementation;
