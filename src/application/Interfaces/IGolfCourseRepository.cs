@@ -5,7 +5,11 @@ namespace OpenGolfCoach.Application.Interfaces;
 
 public interface IGolfCourseRepository
 {
-    public GolfCourse Retrieve(double longitude, double latitude);
+    /// <summary>
+    /// Retrieves the GolfCourse which is closest to the provided location
+    /// </summary>
+    /// <param name="location"></param>
+    /// <returns></returns>
     public GolfCourse Retrieve(Coordinate location);
 
 }
