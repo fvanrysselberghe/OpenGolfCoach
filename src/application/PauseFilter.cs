@@ -1,3 +1,4 @@
+using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;
 using OpenGolfCoach.Application.Models;
 
@@ -18,7 +19,7 @@ namespace OpenGolfCoach.Application
         /// </summary>
         /// <param name="file">Content to retrieve the stops</param>
         /// <returns>Likely stops</returns>
-        public IEnumerable<WaypointCandidate> Apply(GpxFile file)
+        public IEnumerable<Coordinate> Apply(GpxFile file)
         {
             var result = new LinkedList<WaypointCandidate>();
 
@@ -47,7 +48,7 @@ namespace OpenGolfCoach.Application
                 }
             }
 
-            return result.Where(candidate => candidate.Speed <= MaxSpeedForPause);
+            return result.Where(candidate => candidate.Speed <= MaxSpeedForPause).Select(candidate => candidate.Location);
         }
         private double GetDistance(GpxWaypoint current, GpxWaypoint old)
         {
