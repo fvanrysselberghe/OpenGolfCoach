@@ -23,7 +23,7 @@ public class FromGpxImplementation : IFromGpxImplementation
         if (attempts.Count() < 1)
             throw new NoLocationException();
 
-        return new GameInputByLocation("123", _Repository.Retrieve(GetReferencePoint(attempts)), new List<Coordinate>(attempts.Select(candidate => candidate.Location).ToList()));
+        return new GameInputByLocation("123", _Repository.Retrieve(GetReferencePoint(attempts)), new List<Coordinate>(attempts));
     }
 
     /// <summary>
@@ -35,9 +35,9 @@ public class FromGpxImplementation : IFromGpxImplementation
     /// </summary>
     /// <param name="attempts">Locations tracked</param>
     /// <returns></returns>
-    private Coordinate GetReferencePoint(IEnumerable<WaypointCandidate> attempts)
+    private Coordinate GetReferencePoint(IEnumerable<Coordinate> attempts)
     {
-        return attempts.First().Location;
+        return attempts.First();
     }
 
     private readonly IGolfCourseRepository _Repository;
