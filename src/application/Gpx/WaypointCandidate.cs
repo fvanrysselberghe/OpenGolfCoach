@@ -1,6 +1,6 @@
 using NetTopologySuite.Geometries;
 
-namespace OpenGolfCoach.Application.Models;
+namespace OpenGolfCoach.Application.Gpx;
 
 public record class WaypointCandidate
 {

@@ -1,5 +1,6 @@
 using OpenGolfCoach.Application;
 using OpenGolfCoach.Application.Interfaces;
+using OpenGolfCoach.Application.Gpx;
 using OpenGolfCoach.Web;
 
 var builder = WebApplication.CreateBuilder(args);

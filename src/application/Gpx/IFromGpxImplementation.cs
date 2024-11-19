@@ -1,7 +1,7 @@
 using OpenGolfCoach.Application.Models;
 using NetTopologySuite.IO;
 
-namespace OpenGolfCoach.Application.Interfaces;
+namespace OpenGolfCoach.Application.Gpx;
 
 public interface IFromGpxImplementation
 {

@@ -2,7 +2,7 @@ using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;
 using OpenGolfCoach.Application.Models;
 
-namespace OpenGolfCoach.Application
+namespace OpenGolfCoach.Application.Gpx
 {
     /// <summary>
     /// Filters (possible) stops from a set of Gpx Tracks

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration.Xml;
 using NetTopologySuite.IO;
 using OpenGolfCoach.Application;
+using OpenGolfCoach.Application.Gpx;
 using OpenGolfCoach.Application.Interfaces;
 using OpenGolfCoach.Application.Models;
 using OpenGolfCoach.Web.Models;
