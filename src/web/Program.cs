@@ -1,6 +1,7 @@
 using OpenGolfCoach.Application;
 using OpenGolfCoach.Application.Interfaces;
 using OpenGolfCoach.Application.Gpx;
+using OpenGolfCoach.Infrastructure.OpenStreetmap;
 using OpenGolfCoach.Web;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +15,7 @@ builder.Services.AddControllers().AddJsonOptions(jsonOptions =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IGolfCourseRepository, OpenStreetmapRepository>();
+builder.Services.AddScoped<IGolfCourseRetriever, GolfCourseRetriever>();
 builder.Services.AddScoped<IFromGpxImplementation, FromGpxImplementation>();
 
 

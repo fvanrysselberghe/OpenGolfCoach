@@ -1,8 +1,27 @@
+using NetTopologySuite.Operation.Polygonize;
+
 namespace OpenGolfCoach.Application.Models;
 
-public class GolfCourse
+/// <summary>
+/// Represents a golf course that consists of multiple holes.
+/// A golf club can consists of multiple courses. 
+/// </summary>
+public sealed record GolfCourse
 {
-    public GolfCourse(string name) => Name = name;
+    /// <summary>
+    /// Name which identifies the course.
+    /// </summary>
+    public string Name { get; init; } = String.Empty;
 
-    public string Name { get; set; }
+    /// <summary>
+    /// Name of the club that this course is part of.
+    /// A club can consist of multiple course e.g., north and south course.
+    /// </summary>
+    public string ClubName { get; init; } = String.Empty;
+
+    /// <summary>
+    /// Collection of holes that are part of this course. 
+    /// Typically consists of 9 or 18 holes. 
+    /// </summary>
+    public IEnumerable<Hole> Holes { get; init; } = [];
 }

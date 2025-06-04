@@ -3,12 +3,14 @@ using OpenGolfCoach.Application.Models;
 
 namespace OpenGolfCoach.Application.Interfaces;
 
-public interface IGolfCourseRepository
+public interface IGolfCourseRetriever
 {
     /// <summary>
-    /// Retrieves the GolfCourse which is closest to the provided location
+    /// Retrieves the courses which are close to the provided location.
+    /// The most likely candidate (i.e., closest to the target location) is returned first. 
     /// </summary>
     /// <param name="location"></param>
+    /// <param name="maxCandidates">
     /// <returns></returns>
     public GolfCourse Retrieve(Coordinate location);
 

@@ -9,7 +9,7 @@ namespace OpenGolfCoach.Application.Gpx;
 
 public class FromGpxImplementation : IFromGpxImplementation
 {
-    public FromGpxImplementation(IGolfCourseRepository courses) => _Repository = courses;
+    public FromGpxImplementation(IGolfCourseRetriever courses) => _Repository = courses;
 
     public GameInputByLocation Create(GpxFile gpx, double? maxSpeedForStroke)
     {
@@ -41,5 +41,5 @@ public class FromGpxImplementation : IFromGpxImplementation
         return attempts.First();
     }
 
-    private readonly IGolfCourseRepository _Repository;
+    private readonly IGolfCourseRetriever _Repository;
 }
