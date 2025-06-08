@@ -15,7 +15,7 @@ builder.Services.AddControllers().AddJsonOptions(jsonOptions =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IGolfCourseRetriever, GolfCourseRetriever>();
+builder.Services.AddScoped<IGolfCourseRetriever, OverpassApiGolfCourseRetriever>();
 builder.Services.AddScoped<IFromGpxImplementation, FromGpxImplementation>();
 
 

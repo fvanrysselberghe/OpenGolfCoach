@@ -5,9 +5,14 @@ using NetTopologySuite.Geometries;
 
 namespace OpenGolfCoach.Infrastructure.OpenStreetmap;
 
-public class GolfCourseRetriever : IGolfCourseRetriever
+/// <summary>
+/// Retrieves golf courses by quering the overpass API.
+/// The class thus relies on network connectivity. 
+/// The class therefore risks latency and network connectivity problems.
+/// </summary>
+public class OverpassApiGolfCourseRetriever : IGolfCourseRetriever
 {
-    public GolfCourseRetriever(HttpClient client)
+    public OverpassApiGolfCourseRetriever(HttpClient client)
     {
         _client = client;
     }
