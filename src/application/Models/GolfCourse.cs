@@ -14,12 +14,6 @@ public sealed record GolfCourse
     public string Name { get; init; } = String.Empty;
 
     /// <summary>
-    /// Name of the club that this course is part of.
-    /// A club can consist of multiple course e.g., north and south course.
-    /// </summary>
-    public string ClubName { get; init; } = String.Empty;
-
-    /// <summary>
     /// Collection of holes that are part of this course. 
     /// Typically consists of 9 or 18 holes. 
     /// </summary>

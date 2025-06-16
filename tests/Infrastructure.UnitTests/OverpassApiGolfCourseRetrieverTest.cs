@@ -89,7 +89,6 @@ public class OpenStreetMapGolfCourseRetrieverTest
         var expected = new GolfCourse()
         {
             Name = "Work in progress",
-            ClubName = "More progress"
         };
 
         var response = new HttpResponseMessage(HttpStatusCode.OK);

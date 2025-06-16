@@ -23,8 +23,7 @@ public class OverpassApiGolfCourseRetriever : IGolfCourseRetriever
 
         return new GolfCourse()
         {
-            Name = "Work in progress",
-            ClubName = "More progress"
+            Name = "Work in progress"
         };
     }
 
