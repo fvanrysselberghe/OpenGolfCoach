@@ -70,5 +70,7 @@ public record Geometry
 {
     [JsonPropertyName("lat")]
     public double Latitude { get; init; }
+
+    [JsonPropertyName("lon")]
     public double Longitude { get; init; }
 }
