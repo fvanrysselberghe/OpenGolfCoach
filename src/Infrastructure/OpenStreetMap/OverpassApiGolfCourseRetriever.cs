@@ -20,6 +20,7 @@ public class OverpassApiGolfCourseRetriever : IGolfCourseRetriever
     {
         var query = new StringContent(CreateFetchQuery(coordinate));
         var response = _client.PostAsync(OverpassUrl, query);
+        response.Wait();
 
         return new GolfCourse()
         {
