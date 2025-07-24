@@ -6,5 +6,5 @@ namespace OpenGolfCoach.Application.UnitTests;
 
 public class StubGolfRepository : IGolfCourseRetriever
 {
-    public GolfCourse Retrieve(Coordinate location) => new GolfCourse { Name = "Bushwood Country Club" };
+    public Task<GolfCourse> Retrieve(Coordinate location) => Task.FromResult(new GolfCourse { Name = "Bushwood Country Club" });
 }

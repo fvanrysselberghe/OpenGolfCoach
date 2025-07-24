@@ -2,6 +2,8 @@ using OpenGolfCoach.Application.Interfaces;
 using OpenGolfCoach.Application.Models;
 using System.Net;
 using NetTopologySuite.Geometries;
+using System.Text.Json.Nodes;
+using System.Net.Http.Json;
 
 namespace OpenGolfCoach.Infrastructure.OpenStreetmap;
 
@@ -16,11 +18,12 @@ public class OverpassApiGolfCourseRetriever : IGolfCourseRetriever
     {
         _client = client;
     }
-    public GolfCourse Retrieve(Coordinate coordinate)
+    public async Task<GolfCourse> Retrieve(Coordinate coordinate)
     {
         var query = new StringContent(CreateFetchQuery(coordinate));
-        var response = _client.PostAsync(OverpassUrl, query);
-        response.Wait();
+        var response = await _client.PostAsync(OverpassUrl, query);
+
+
 
         return new GolfCourse()
         {

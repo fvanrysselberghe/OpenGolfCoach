@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Moq;
 using Moq.Protected;
 using NetTopologySuite.Geometries;
@@ -87,7 +88,7 @@ public class OpenStreetMapGolfCourseRetrieverTest
     }
 
     [Fact]
-    public void WhenSingleCandidateReturnAsCourse()
+    public async Task WhenSingleCandidateReturnAsCourse()
     {
         var expected = new GolfCourse()
         {
@@ -112,7 +113,7 @@ public class OpenStreetMapGolfCourseRetrieverTest
 
         var tested = new OverpassApiGolfCourseRetriever(client);
 
-        var course = tested.Retrieve(new NetTopologySuite.Geometries.Coordinate(0, 0));
+        var course = await tested.Retrieve(new NetTopologySuite.Geometries.Coordinate(0, 0));
 
         Assert.Equal(expected, course);
     }

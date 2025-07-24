@@ -5,5 +5,5 @@ namespace OpenGolfCoach.Application.Gpx;
 
 public interface IFromGpxImplementation
 {
-    public GameInputByLocation Create(GpxFile gpx, double? maxSpeedForStroke);
+    public Task<GameInputByLocation> Create(GpxFile gpx, double? maxSpeedForStroke);
 }

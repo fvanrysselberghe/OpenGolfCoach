@@ -12,6 +12,6 @@ public interface IGolfCourseRetriever
     /// <param name="location"></param>
     /// <param name="maxCandidates">
     /// <returns></returns>
-    public GolfCourse Retrieve(Coordinate location);
+    public Task<GolfCourse> Retrieve(Coordinate location);
 
 }

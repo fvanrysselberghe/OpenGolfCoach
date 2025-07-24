@@ -1,5 +1,6 @@
 using System.Drawing;
 using System.Net;
+using System.Threading.Tasks;
 using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;
 using OpenGolfCoach.Application.Interfaces;
@@ -11,7 +12,7 @@ public class FromGpxImplementation : IFromGpxImplementation
 {
     public FromGpxImplementation(IGolfCourseRetriever courses) => _Repository = courses;
 
-    public GameInputByLocation Create(GpxFile gpx, double? maxSpeedForStroke)
+    public async Task<GameInputByLocation> Create(GpxFile gpx, double? maxSpeedForStroke)
     {
         var filter = new PauseFilter();
 
@@ -23,7 +24,7 @@ public class FromGpxImplementation : IFromGpxImplementation
         if (attempts.Count() < 1)
             throw new NoLocationException();
 
-        var result = new GameInputByLocation("123", _Repository.Retrieve(GetReferencePoint(attempts)), new List<Coordinate>(attempts));
+        var result = new GameInputByLocation("123", await _Repository.Retrieve(GetReferencePoint(attempts)), new List<Coordinate>(attempts));
         return result;
     }
 
