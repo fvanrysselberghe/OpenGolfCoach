@@ -54,7 +54,6 @@ public class OpenStreetMapGolfCourseRetrieverTest
         });
 
         // Add holes
-        var holeNumber = 0;
         foreach (var hole in course.Holes)
         {
             var overpassLine = new List<OpenGolfCoach.Infrastructure.OpenStreetmap.Geometry>();
@@ -75,7 +74,7 @@ public class OpenStreetMapGolfCourseRetrieverTest
                 Tags = new Dictionary<string, string>
                 {
                     ["golf"] = "hole",
-                    ["ref"] = holeNumber.ToString(),
+                    ["ref"] = hole.Number.ToString(),
                 }
             });
         }
